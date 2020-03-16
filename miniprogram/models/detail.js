@@ -21,6 +21,7 @@ export default class DetailModel {
   }
 
   static formatGoalData(data) {
+    
     const goalInfo = data.goalInfo.data
     const goalRecords = data.goalRecords.data[0].records
 

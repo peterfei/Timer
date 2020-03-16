@@ -8,7 +8,7 @@ const _ = db.command
 
 exports.main = async (event, context) => {
   const { goalId } = event
-
+  
   if (!goalId) {
     return
   }
@@ -18,7 +18,7 @@ exports.main = async (event, context) => {
       .collection('goals')
       .doc(goalId)
       .get()
-
+    
     const goalRecords = await db
       .collection('goal-records')
       .where({

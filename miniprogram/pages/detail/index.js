@@ -103,6 +103,7 @@ Page({
   getGoalData(goalId) {
     DetailModel.getGoalData(goalId).then(
       res => {
+        // debugger
         const data = DetailModel.formatGoalData(res.result)
         this.setData({
           goalTitle: data.title,
