@@ -73,7 +73,7 @@ Page({
 
   onShareAppMessage() {
     return {
-      title: '我在用 Chronus 来记录目标进度'
+      title: '我在用 Timer 来记录目标进度'
     }
   },
 
