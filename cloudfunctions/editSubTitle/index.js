@@ -11,17 +11,27 @@ exports.main = async (event, context) => {
   if (!goalId || !oldSubTitle) return
 
   try {
-    let result = await db
-      .collection('goal-records')
+      const _db = await db.collection('goal-records')
           .where({
-            goalId:goalId,"records.summary":oldSubTitle
+            goalId: goalId,
+             "records.summary":oldSubTitle
+          }).get()
+      const result = await  _db.data
+      let _index = result[0].records.findIndex(x=>x.summary==oldSubTitle)
+     let newKey = `records.${_index}.summary`
+    //let newKey = "records.0.summary"
+    let _data = { [newKey]: newSubTitle}
+    //_data[newkey]  = newSubTitle
+        let result0 = await db
+          .collection('goal-records')
+          .where({
+            goalId: goalId,
+            "records.summary": oldSubTitle
           })
-      .update({
-        data: {
-          'records.$[].summary': newSubTitle
-        }
-      })
-    let _result = await db.collection('goal-records').where({"records.summary":newSubTitle}).get()
+          .update({
+            data: _data
+          })
+    let _result = await db.collection('goal-records').where({ goalId: goalId}).get()
     return _result.data
   } catch (e) {
     console.log(e)

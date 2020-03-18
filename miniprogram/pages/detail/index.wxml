@@ -29,7 +29,7 @@
         <view class="record-content">
             <view class="record-content-row">
                 <view class="record-title">{{item.summary}}</view>
-                <image mode="aspectFit" bind:tap="onEditSubTitle" class="edit-goal-title" src="../../images/detail/edit.png"></image>
+                <image mode="aspectFit" bind:tap="onEditSubTitle" data-summary="{{item.summary}}" class="edit-goal-title" src="../../images/detail/edit.png"></image>
             </view>
         <view class="tags">
           <m-tag>{{item.date}}</m-tag>
@@ -39,7 +39,7 @@
         <view class="num">{{item.duration.pref}}</view>
         <view class="unit">{{item.duration.suff}}</view>
       </view>
-      <m-modal title="将描述修改为？" inputPlaceholder="{{item.summary}}" wx:if="{{isEditingSubTitle}}" bind:confirm="onEditSubCompleted" bind:cancel="onEditCancel"  data-name="{{item.summary}}" />
+      <m-modal title="将描述修改为？" inputPlaceholder="{{subTitlePlace}}" wx:if="{{isEditingSubTitle}}" bind:confirm="onEditSubCompleted" bind:cancel="onEditCancel"  data-name="{{subTitlePlace}}" />
     </view>
   </view>
   <view class="loading" wx:elif="{{!goalRecords}}">

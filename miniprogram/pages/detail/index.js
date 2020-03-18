@@ -13,7 +13,8 @@ Page({
     goalRecords: null,
     isEditingTitle: false,
     isEditingSubTitle: false,
-    isUploadingTitle: false
+    isUploadingTitle: false,
+      subTitlePlace:""
   },
 
   onLoad: function(options) {
@@ -45,9 +46,10 @@ Page({
     })
   },
 
-  onEditSubTitle() {
+  onEditSubTitle(e) {
     this.setData({
-      isEditingSubTitle: true
+      isEditingSubTitle: true,
+      subTitlePlace:e.target.dataset.summary
     })
   },
   onEditCompleted(e) {
