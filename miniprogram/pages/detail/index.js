@@ -12,6 +12,7 @@ Page({
     longestDuration: '',
     goalRecords: null,
     isEditingTitle: false,
+    isEditingSubTitle: false,
     isUploadingTitle: false
   },
 
@@ -44,6 +45,11 @@ Page({
     })
   },
 
+  onEditSubTitle() {
+    this.setData({
+      isEditingSubTitle: true
+    })
+  },
   onEditCompleted(e) {
     if (!e.detail.length) {
       showToast('标题不能为空')
@@ -79,9 +85,41 @@ Page({
       })
   },
 
+  onEditSubCompleted(e) {
+    if (!e.detail.length) {
+      showToast('标题不能为空')
+      return
+    }
+
+    if (this.data.isUploadingTitle) return
+
+    this.data.isUploadingTitle = true
+
+    DetailModel.editSubTitle(this.data.goalId,e.currentTarget.dataset.name, e.detail)
+      .then(res => {
+
+        const data = DetailModel.formatSubData(res.result[0].records)
+        this.setData({
+          isEditingSubTitle: false,
+          goalRecords: data.goalSubRecords
+        })
+
+        this.data.isUploadingTitle = false
+        showToast('修改成功', true)
+      })
+      .catch(err => {
+        this.setData({
+          isEditingSubTitle: false
+        })
+        this.data.isUploadingTitle = false
+        showToast('修改失败')
+      })
+  },
+
   onEditCancel() {
     this.setData({
-      isEditingTitle: false
+      isEditingTitle: false,
+      isEditingSubTitle: false
     })
   },
 

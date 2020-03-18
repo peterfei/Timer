@@ -21,7 +21,7 @@ export default class DetailModel {
   }
 
   static formatGoalData(data) {
-    
+
     const goalInfo = data.goalInfo.data
     const goalRecords = data.goalRecords.data[0].records
 
@@ -34,6 +34,15 @@ export default class DetailModel {
     }
   }
 
+  static formatSubData(data) {
+
+    const goalSubRecords = data
+
+    return {
+     // title: goalInfo.title,
+      goalSubRecords: this.formatGoalRecords(goalSubRecords),
+    }
+  }
   static formatGoalRecords(goalRecords) {
     if (!goalRecords) return []
     return goalRecords.map(record => ({
@@ -61,6 +70,17 @@ export default class DetailModel {
       data: {
         goalId,
         goalTitle
+      }
+    })
+  }
+
+  static editSubTitle(goalId, oldSubTitle,newSubTitle) {
+    return wx.cloud.callFunction({
+      name: 'editSubTitle',
+      data: {
+        goalId,
+        oldSubTitle,
+        newSubTitle
       }
     })
   }

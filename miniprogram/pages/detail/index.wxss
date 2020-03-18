@@ -143,7 +143,10 @@
   font-size: 24rpx;
   color: #777;
 }
-
+.record-content-row{
+    display:flex;
+    flex-direction:row;
+}
 .record-content > .record-title {
   font-size: 30rpx;
   font-weight: bold;
@@ -155,4 +158,11 @@
 /* 加载 */
 .loading {
   margin-top: 100rpx;
+}
+
+.record-content-row>.edit-goal-title {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 16rpx;
+  align-self: flex-end;
 }

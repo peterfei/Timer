@@ -26,8 +26,11 @@
   <view class="subtitle">目标记录</view>
   <view class="record-container" wx:if="{{goalRecords.length}}">
     <view class="record" wx:for="{{goalRecords}}" wx:key="beginDate">
-      <view class="record-content">
-        <view class="record-title">{{item.summary}}</view>
+        <view class="record-content">
+            <view class="record-content-row">
+                <view class="record-title">{{item.summary}}</view>
+                <image mode="aspectFit" bind:tap="onEditSubTitle" class="edit-goal-title" src="../../images/detail/edit.png"></image>
+            </view>
         <view class="tags">
           <m-tag>{{item.date}}</m-tag>
         </view>
@@ -36,6 +39,7 @@
         <view class="num">{{item.duration.pref}}</view>
         <view class="unit">{{item.duration.suff}}</view>
       </view>
+      <m-modal title="将描述修改为？" inputPlaceholder="{{item.summary}}" wx:if="{{isEditingSubTitle}}" bind:confirm="onEditSubCompleted" bind:cancel="onEditCancel"  data-name="{{item.summary}}" />
     </view>
   </view>
   <view class="loading" wx:elif="{{!goalRecords}}">
